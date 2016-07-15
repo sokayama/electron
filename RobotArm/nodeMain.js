@@ -170,9 +170,10 @@ server.on("request", function(req, res){
 
 // 待ち受けするポートとアドレスを指定
 var PORT = 8080;
-var ADDRESS = '127.0.0.1';
+var ADDRESS = '192.168.1.89';
 
 // 指定したポートで待ち受けを開始する
-server.listen(PORT, ADDRESS);
+//server.listen(PORT, ADDRESS);
+server.listen(PORT);
 console.log('Server running at http://' + ADDRESS + ':' + PORT + '/');
 
