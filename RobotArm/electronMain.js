@@ -12,10 +12,14 @@ app.on("window-all-closed",function(){
     }
 });
 
+//electronのinitが終わったら
 app.on("ready",function(){
-    mainWindow = new BrowserWindow({width:800,height:600});
-    mainWindow.loadURL("file://" + __dirname + "/index.html");
+    //create window
+    mainWindow = new BrowserWindow({width:1280,height:1024,"node-intefration":false});
+    //mainWindow.loadURL("file://" + __dirname + "/index.html");
+    mainWindow.loadURL("http://127.0.0.1:8080");
 
+    //windowが閉じられたら終了する
     mainWindow.on("closed",function(){
         mainWindow = null;
     });
