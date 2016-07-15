@@ -205,11 +205,11 @@ function initialize(){
 
 	var socket = io.connect();//connection開始
 	var ele_ipbox = document.getElementById("ip_box");
-	var ele_button_disconnect = document.getElementById("button_disconnect");
-	ele_button_disconnect.addEventListener("click",function(){
-		console.log("切断")
-		socket.disconnect();
-	})
+	// var ele_button_disconnect = document.getElementById("button_disconnect");
+	// ele_button_disconnect.addEventListener("click",function(){
+	// 	console.log("切断")
+	// 	socket.disconnect();
+	// })
 
 		// window.onload = function (){
 			socket.on("push1",function(push_data){//サーバーから受信
@@ -237,7 +237,10 @@ function initialize(){
 				console.log("書き変わってます")
 				guestdata_list = push_data;
 				console.log("receive guestdata_list : " + push_data);
-				ele_ipbox.value = guestdata_list;
+				ele_ipbox.value = "";
+				for(var i=0;i<guestdata_list.length;i++){
+					ele_ipbox.value += ("[" + guestdata_list[i] + "]\n");
+				}
 			});
 			socket.on("push_guest",function(push_data){//自分のIPキープしとく
 				myIP = push_data;
