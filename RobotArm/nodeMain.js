@@ -7,7 +7,7 @@ var http = require('http');
 var server = http.createServer();
 
 var io = require("socket.io")(server);
-//タイムアウトを5秒に設定する
+//タイムアウトを5秒に設定する　動いてなさそう……
 io.set('heartbeat timeout',5000);
 io.set('heartbeat interval',5000);
 
@@ -22,9 +22,6 @@ var push_data20 = 0;
 io.on("connection",function(socket){//
 
 //接続しているクライアント情報取得    
-  // socket.on("disconnected",function(){
-  //   console.log("disconectttttt");
-  // })
   console.log("[" + socket.handshake.address + "] is connected");
   guestdata_list.push(socket.handshake.address);//接続者リスト（arrayだけど）をつくる
   guestdata = socket.handshake.address;
@@ -95,7 +92,8 @@ server.on("request", function(req, res){
   //console.log(url);
   //console.log(req.headers);
 
-
+//アクセスされたurlに対してなんか返す。
+//ファイルを読み込んで書き出す
   if(url.match("/api")){
     console.log("api access");
       // res.writeHead(200, {"Content-Type": "text/plain"});

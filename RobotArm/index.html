@@ -18,10 +18,12 @@ varying vec4 vColor;
 
 void main(){
 	//vNormal = normal;
-	vec2 temptexcoord = texCoord;
+	vec2 temptexcoord = texCoord;//一応持ってるだけで使ってない
 
+	//逆転置行列*法線でスフィア環境マップを作る
 	textureCoord.st = ((mv_invtransposeMatrix * vec4(normal,0.0)).xy + 1.0) / 2.0;
 
+	//光の計算(平行光)
 	vec3 n = (invtransposeMatrix * vec4(normal,0.0)).xyz;	
 	float dotNormal = max(dot(lightDirection,n),0.3);
 	vColor = vec4(color.rgb * dotNormal, color.a);

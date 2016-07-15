@@ -1,3 +1,5 @@
+//必要なものをべちゃべちゃ貼り付けてる。きたない
+
 var c, gl, vs, fs;
 var textures = [];
 
@@ -192,13 +194,8 @@ function initialize(){
 		slider20 = eve.currentTarget.value - 0;//cast
 	},false);
 
-	// function emit_slider(send,ele_slider){
-	// 	ele_slider.addEventListener("change",function(eve){
-	// 		socket.emit(send,ele_slider.value);//サーバーへ送信
-	// 	},false);
-	// }
-	// 
 
+	//socket.io関係	
 	var guestdata_list = [];
 	var myIP = 0;
 
@@ -211,68 +208,63 @@ function initialize(){
 	// 	socket.disconnect();
 	// })
 
-		// window.onload = function (){
-			socket.on("push1",function(push_data){//サーバーから受信
-				ele_slider1.value = push_data;
-				slider1 = push_data;
-				console.log("receive push_data : " + push_data);
-			});
-			socket.on("push10",function(push_data){//サーバーから受信
-				ele_slider10.value = push_data;
-				slider10 = push_data;
-				console.log("receive push_data : " + push_data);
-			});
-			socket.on("push2",function(push_data){//サーバーから受信
-				ele_slider2.value = push_data;
-				slider2 = push_data;
-				console.log("receive push_data : " + push_data);
-			});
-			socket.on("push20",function(push_data){//サーバーから受信
-				ele_slider20.value = push_data;
-				slider20 = push_data;
-				console.log("receive push_data : " + push_data);
-			});
+	socket.on("push1",function(push_data){//サーバーから受信
+		ele_slider1.value = push_data;
+		slider1 = push_data;
+		console.log("receive push_data : " + push_data);
+	});
+	socket.on("push10",function(push_data){//サーバーから受信
+		ele_slider10.value = push_data;
+		slider10 = push_data;
+		console.log("receive push_data : " + push_data);
+	});
+	socket.on("push2",function(push_data){//サーバーから受信
+		ele_slider2.value = push_data;
+		slider2 = push_data;
+		console.log("receive push_data : " + push_data);
+	});
+	socket.on("push20",function(push_data){//サーバーから受信
+		ele_slider20.value = push_data;
+		slider20 = push_data;
+		console.log("receive push_data : " + push_data);
+	});
 
-			socket.on("push_guest_list",function(push_data){//接続してる人たち
-				console.log("書き変わってます")
-				guestdata_list = push_data;
-				console.log("receive guestdata_list : " + push_data);
-				ele_ipbox.value = "";
-				for(var i=0;i<guestdata_list.length;i++){
-					ele_ipbox.value += ("[" + guestdata_list[i] + "]\n");
-				}
-			});
-			socket.on("push_guest",function(push_data){//自分のIPキープしとく
-				myIP = push_data;
-				console.log("私のIPは" + myIP)
-			});
-			socket.on("connect",function(){
-			　//タイムアウトを5秒に設定する
-			　socket.headbeatTimeout = 5000;
-			});
-			window.onbeforeunload = function (e) {
-				console.log("disconnected..." + myIP)
-				socket.emit("user_disconnected",myIP);
+	socket.on("push_guest_list",function(push_data){//接続してる人たち
+		console.log("書き変わってます")
+		guestdata_list = push_data;
+		console.log("receive guestdata_list : " + push_data);
+		ele_ipbox.value = "";
+		for(var i=0;i<guestdata_list.length;i++){
+			ele_ipbox.value += ("[" + guestdata_list[i] + "]\n");
+		}
+	});
+	socket.on("push_guest",function(push_data){//自分のIPキープしとく
+		myIP = push_data;
+		console.log("私のIPは" + myIP)
+	});
+	socket.on("connect",function(){
+	　//タイムアウトを5秒に設定する
+	　socket.headbeatTimeout = 5000;
+	});
+	window.onbeforeunload = function (e) {
+		console.log("disconnected..." + myIP)
+		socket.emit("user_disconnected",myIP);
+
+	}
 	
-			}
-			// socket.on("disconnect",function(){//このIP（自分）がディスコネしましたよ～
-			// 	console.log("disconnected..." + myIP)
-			// 	socket.emit("user_disconnected",myIP);
-			// });
-			
-		// };
-		ele_slider1.addEventListener("change",function(eve){
-			socket.emit("send1",ele_slider1.value);//サーバーへ送信
-		},false);
-		ele_slider10.addEventListener("change",function(eve){
-			socket.emit("send10",ele_slider10.value);//サーバーへ送信
-		},false);
-		ele_slider2.addEventListener("change",function(eve){
-			socket.emit("send2",ele_slider2.value);//サーバーへ送信
-		},false);
-		ele_slider20.addEventListener("change",function(eve){
-			socket.emit("send20",ele_slider20.value);//サーバーへ送信
-		},false);
+	//スライダ情報の取得
+	ele_slider1.addEventListener("change",function(eve){
+		socket.emit("send1",ele_slider1.value);//サーバーへ送信
+	},false);
+	ele_slider10.addEventListener("change",function(eve){
+		socket.emit("send10",ele_slider10.value);//サーバーへ送信
+	},false);
+	ele_slider2.addEventListener("change",function(eve){
+		socket.emit("send2",ele_slider2.value);//サーバーへ送信
+	},false);
+	ele_slider20.addEventListener("change",function(eve){
+		socket.emit("send20",ele_slider20.value);//サーバーへ送信
+	},false);
 
 
 		
@@ -304,19 +296,6 @@ function initialize(){
 	},false)
 
 	var counter = 0;
-
-	function trace()
-	{
-		traceData = createEarth(2,30);
-
-		// VBOの生成
-		var traceVBO = [];
-		jointVBO[0] = create_vbo(traceData.p);
-		jointVBO[1] = create_vbo(traceData.t);
-
-
-	
-	}
 
 	timerFunc();
 	function timerFunc()
